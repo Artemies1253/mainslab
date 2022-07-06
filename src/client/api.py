@@ -1,6 +1,7 @@
 from django.db.models import Sum, Count
 from rest_framework import generics
 from rest_framework.response import Response
+from django.db import transaction
 
 from src.client.models import Client
 from src.client.serializers import UploadClientFromFileSerializer, ClientListSerializer
@@ -16,8 +17,6 @@ class UploadClientFromFileAPIView(generics.GenericAPIView):
         if serializer.is_valid(raise_exception=True):
             create_clients_from_file(serializer.validated_data.get("file"))
             return Response({"success": True})
-
-        return Response({"success": False})
 
 
 class ClientListAPIView(generics.ListAPIView):

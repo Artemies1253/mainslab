@@ -18,8 +18,6 @@ class UploadBillFromFileAPIView(generics.GenericAPIView):
             create_bills_from_file(serializer.validated_data.get("file"))
             return Response({"success": True})
 
-        return Response({"success": False})
-
 
 class ListBillAPIView(generics.ListAPIView):
     serializer_class = DetailBillSerializer
